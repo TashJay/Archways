@@ -23,7 +23,7 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-archways-base/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Building2 className="w-8 h-8 text-archways-red" />
+            <img src="/archways logo.png" alt="Archways Consultants" className="h-10 w-auto" />
             <span className="text-xl font-bold tracking-tight text-white">Archways<span className="text-archways-red">.</span></span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">

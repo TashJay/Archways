@@ -1,4 +1,4 @@
-import { motion, useInView } from 'motion/react';
+import { motion, useInView, useScroll, useSpring } from 'motion/react';
 import { ArrowRight, BarChart3, Mail, Network, Twitter, Users, Building2, ChevronRight, TrendingUp, Linkedin, ChevronDown, Search, PenTool, MapPin, LineChart, FileCheck } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
@@ -6,8 +6,19 @@ import type { ReactNode } from 'react';
 import heroBg from './assets/images/nairobi_data_skyline_1780696343014.png';
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <div className="min-h-screen bg-archways-base text-slate-200 font-sans selection:bg-archways-red/30 selection:text-white">
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-archways-red z-[100] origin-left"
+        style={{ scaleX }}
+      />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-archways-base/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -276,8 +287,8 @@ export default function App() {
                <div className="mb-8">
                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Location Matrix</h4>
                  <p className="text-slate-400 font-light leading-relaxed">
-                   Nairobi, Kenya<br />
-                   Global Operations Hub
+                   Kerugoya, Kenya<br />
+                   Kirinyaga County
                  </p>
                </div>
                <div className="flex gap-4">

@@ -1,0 +1,8 @@
+{
+  "name": "Archways Consultants",
+  "description": "Professional multi-disciplinary research firm corporate website.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

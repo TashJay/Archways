@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Kenyan Corporate Palette */
+  --color-archways-base: #0f1110; /* Very dark rich black/green */
+  --color-archways-surface: #1b1e1d; /* Slightly lighter surface */
+  --color-archways-red: #B91C1C; /* Professional Crimson (red-700) */
+  --color-archways-green: #15803d; /* Professional Forest Green (green-700) */
+  --color-archways-amber: #b45309; /* Deep terracotta/amber (amber-700) */
+}
+

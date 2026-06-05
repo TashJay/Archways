@@ -1,6 +1,6 @@
-import { motion } from 'motion/react';
-import { ArrowRight, BarChart3, Mail, Network, Twitter, Users, Building2, ChevronRight, TrendingUp, Linkedin, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { motion, useInView } from 'motion/react';
+import { ArrowRight, BarChart3, Mail, Network, Twitter, Users, Building2, ChevronRight, TrendingUp, Linkedin, ChevronDown, Search, PenTool, MapPin, LineChart, FileCheck } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 // @ts-ignore
 import heroBg from './assets/images/nairobi_data_skyline_1780696343014.png';
@@ -20,10 +20,10 @@ export default function App() {
             <a href="#insights" className="hover:text-white transition-colors">Insights</a>
             <a href="#about" className="hover:text-white transition-colors">Firm</a>
           </div>
-          <button className="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded text-sm font-medium transition-all flex items-center gap-2 group">
+          <a href="#contact" className="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded text-sm font-medium transition-all flex items-center gap-2 group">
             Global Reach
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -86,13 +86,13 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <button className="bg-archways-red hover:bg-archways-red/90 text-white px-8 py-4 rounded font-semibold transition-colors flex items-center justify-center gap-2">
+              <a href="#contact" className="bg-archways-red hover:bg-archways-red/90 text-white px-8 py-4 rounded font-semibold transition-colors flex items-center justify-center gap-2">
                 Engage Our Experts
                 <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="border border-slate-700 hover:bg-slate-800 text-white px-8 py-4 rounded font-medium transition-colors flex items-center justify-center">
+              </a>
+              <a href="#services" className="border border-slate-700 hover:bg-slate-800 text-white px-8 py-4 rounded font-medium transition-colors flex items-center justify-center">
                 Explore Methodologies
-              </button>
+              </a>
             </motion.div>
           </div>
         </div>
@@ -139,20 +139,53 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             <div>
-              <div className="text-4xl text-archways-red font-bold mb-2">98%</div>
+              <div className="text-4xl text-archways-red font-bold mb-2">
+                <AnimatedCounter to={98} suffix="%" />
+              </div>
               <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">Predictive Accuracy</div>
             </div>
             <div>
-              <div className="text-4xl text-white font-bold mb-2">47</div>
+              <div className="text-4xl text-white font-bold mb-2">
+                <AnimatedCounter to={47} />
+              </div>
               <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">Counties Covered</div>
             </div>
             <div>
-              <div className="text-4xl text-white font-bold mb-2">15</div>
+              <div className="text-4xl text-white font-bold mb-2">
+                <AnimatedCounter to={15} />
+              </div>
               <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">Target Sectors</div>
             </div>
             <div>
-              <div className="text-4xl text-archways-amber font-bold mb-2">&lt; 1%</div>
+              <div className="text-4xl text-archways-amber font-bold mb-2">
+                <AnimatedCounter to={1} prefix="< " suffix="%" />
+              </div>
               <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">Margin of Error</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Engagement Journey Section */}
+      <section id="process" className="py-24 border-b border-white/5 bg-archways-surface/30 px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-20 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Engagement Journey</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto md:mx-0">A rigorous, structured approach from initial discovery to the delivery of actionable strategic intelligence.</p>
+          </div>
+
+          <div className="relative">
+            {/* Desktop Horizontal Line */}
+            <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-px bg-slate-700/50"></div>
+            {/* Mobile Vertical Line */}
+            <div className="md:hidden absolute left-[39px] top-10 bottom-10 w-px bg-slate-700/50"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-6 relative">
+               <ProcessStep num="01" title="Discovery" desc="Aligning on core objectives and scoping." icon={<Search className="w-8 h-8" />} delay={0} />
+               <ProcessStep num="02" title="Design" desc="Architecting our research methodology." icon={<PenTool className="w-8 h-8" />} delay={0.15} />
+               <ProcessStep num="03" title="Execution" desc="Deploying field teams across regions." icon={<MapPin className="w-8 h-8" />} delay={0.3} />
+               <ProcessStep num="04" title="Analytics" desc="Processing and modeling the gathered data." icon={<LineChart className="w-8 h-8" />} delay={0.45} />
+               <ProcessStep num="05" title="Delivery" desc="Presenting empirical, strategic insights." icon={<FileCheck className="w-8 h-8" />} delay={0.6} />
             </div>
           </div>
         </div>
@@ -186,8 +219,42 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer / Contact Section */}
-      <footer className="bg-archways-base pt-24 pb-12 relative overflow-hidden">
+      {/* Contact Form Section */}
+      <section id="contact" className="py-24 border-b border-white/5 bg-archways-surface/10">
+        <div className="max-w-3xl mx-auto px-6">
+           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Initiate a Project</h2>
+           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-400 mb-2">First Name</label>
+                  <input type="text" className="w-full bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 text-white focus:outline-none focus:border-archways-red focus:bg-slate-800 transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-400 mb-2">Last Name</label>
+                  <input type="text" className="w-full bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 text-white focus:outline-none focus:border-archways-red focus:bg-slate-800 transition-colors" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
+                <input type="email" className="w-full bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 text-white focus:outline-none focus:border-archways-red focus:bg-slate-800 transition-colors" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Company / Organization</label>
+                <input type="text" className="w-full bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 text-white focus:outline-none focus:border-archways-red focus:bg-slate-800 transition-colors" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">Project Brief</label>
+                <textarea rows={4} className="w-full bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 text-white focus:outline-none focus:border-archways-red focus:bg-slate-800 transition-colors"></textarea>
+              </div>
+              <button type="submit" className="w-full bg-archways-red hover:bg-archways-red/90 text-white font-semibold py-4 rounded transition-colors mt-4">
+                Submit Inquiry
+              </button>
+           </form>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="bg-archways-base pt-16 pb-12 relative overflow-hidden">
         {/* Subtle geometric background line */}
         <div className="absolute right-0 bottom-0 w-1/2 h-px bg-linear-to-r from-transparent to-archways-red/20"></div>
         
@@ -280,5 +347,56 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
       </motion.div>
     </div>
   );
+}
+
+function ProcessStep({ num, title, desc, icon, delay }: { num: string, title: string, desc: string, icon: ReactNode, delay: number }) {
+  return (
+    <motion.div
+       initial={{ opacity: 0, y: 20 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       viewport={{ once: true, margin: "-50px" }}
+       transition={{ duration: 0.6, delay }}
+       className="relative flex md:flex-col items-center md:items-center text-left md:text-center group"
+    >
+      <div className="w-20 h-20 shrink-0 rounded-full bg-archways-base border border-slate-700/80 group-hover:border-archways-red transition-colors z-10 flex items-center justify-center shadow-lg mb-0 md:mb-6 mr-6 md:mr-0">
+        <div className="text-archways-red group-hover:text-white transition-colors">
+           {icon}
+        </div>
+      </div>
+      <div>
+        <div className="text-archways-red font-mono text-xs font-semibold mb-2 tracking-widest uppercase">Phase {num}</div>
+        <h3 className="text-white text-xl font-bold mb-2">{title}</h3>
+        <p className="text-slate-400 font-light text-sm leading-relaxed">{desc}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+function AnimatedCounter({ from = 0, to, duration = 2, suffix = '', prefix = '' }: { from?: number, to: number, duration?: number, suffix?: string, prefix?: string }) {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
+  const [value, setValue] = useState(from);
+
+  useEffect(() => {
+    if (isInView) {
+      let start: number | null = null;
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / (duration * 1000), 1);
+        // Easing function: easeOutQuart
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
+        setValue(Math.floor(easeProgress * (to - from) + from));
+        
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          setValue(to); // Ensure it ends exactly on the target value
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }, [isInView, from, to, duration]);
+
+  return <span ref={nodeRef}>{prefix}{value}{suffix}</span>;
 }
 
